@@ -25,6 +25,11 @@ mongoose.connection.openUri(process.env.URLDB, { useNewUrlParser: true }, (err, 
 app.use(express.json());
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }))
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // Rutas
 app.use('/busqueda', busquedaRoutes);
